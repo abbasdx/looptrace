@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Mail, Lock, Briefcase, Hash, 
-  ChevronDown, Loader2, AlertTriangle, ArrowRight 
+  ChevronDown, Loader2, AlertTriangle, ArrowRight,
+  User, Truck, Recycle, Info
 } from 'lucide-react';
 import api from '../services/api';
 import logo from '../assets/looptrace.png';
@@ -39,6 +40,12 @@ const AuthPage = ({ onAuthenticated }) => {
     } finally {
       setBusy(false);
     }
+  };
+
+  // Helper to auto-fill demo credentials
+  const fillDemoCredentials = (email, password) => {
+    setForm({ ...form, email, password });
+    setError('');
   };
 
   return (
@@ -153,7 +160,43 @@ const AuthPage = ({ onAuthenticated }) => {
             </div>
           )}
 
-          <div className="pt-4">
+          {/* --- DEMO CREDENTIALS AUTO-FILL (Only visible in Login mode) --- */}
+          {mode === 'login' && (
+            <div className="bg-[#F8FAF7] border border-borderMain/60 rounded-2xl p-4 mt-2 animate-fade-in">
+              <div className="flex items-center gap-1.5 mb-3 text-secondary">
+                <Info size={14} />
+                <p className="text-[10px] font-bold uppercase tracking-wider">Reviewer Quick Login</p>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => fillDemoCredentials('me@gmail.com', '1234567891234')}
+                  className="flex flex-col items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-600 p-2.5 rounded-xl hover:border-primary hover:text-primary transition-all shadow-sm active:scale-95"
+                >
+                  <User size={16} />
+                  <span className="text-[10px] font-bold">Household</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => fillDemoCredentials('rajesh@gmail.com', '123456')}
+                  className="flex flex-col items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-600 p-2.5 rounded-xl hover:border-blue-500 hover:text-blue-600 transition-all shadow-sm active:scale-95"
+                >
+                  <Truck size={16} />
+                  <span className="text-[10px] font-bold">Collector</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => fillDemoCredentials('demo@gmail.com', '123456')}
+                  className="flex flex-col items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-600 p-2.5 rounded-xl hover:border-green-600 hover:text-green-700 transition-all shadow-sm active:scale-95"
+                >
+                  <Recycle size={16} />
+                  <span className="text-[10px] font-bold">Recycler</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="pt-2">
             <button 
               disabled={busy} 
               className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/50 disabled:scale-100 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
