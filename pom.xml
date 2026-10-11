@@ -131,7 +131,8 @@
 
 	</dependencies>
 
-	<build>
+	<build >
+		<finalName>looptrace</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
