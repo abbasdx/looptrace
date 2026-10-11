@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:?SPRING_DATASOURCE_URL must be configured}
+    username: ${SPRING_DATASOURCE_USERNAME:?SPRING_DATASOURCE_USERNAME must be configured}
+    password: ${SPRING_DATASOURCE_PASSWORD:?SPRING_DATASOURCE_PASSWORD must be configured}
+
+looptrace:
+  auth:
+    enabled: true
+    baseline-on-migrate: true
+    jwt-secret: ${LOOPTRACE_JWT_SECRET}
+  storage:
+    bucket: ${LOOPTRACE_S3_BUCKET:${AWS_S3_BUCKET:?AWS_S3_BUCKET must be configured}}
+    region: ${AWS_REGION:ap-south-1}
+  admin:
+    api-key: ${LOOPTRACE_ADMIN_API_KEY:?LOOPTRACE_ADMIN_API_KEY must be configured}
+  ai:
+    api-key: ${GEMINI_API_KEY:?GEMINI_API_KEY must be configured}

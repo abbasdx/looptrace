@@ -1,0 +1,4 @@
+looptrace:
+  seed-demo: true
+  auth:
+    enabled: false
